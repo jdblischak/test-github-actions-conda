@@ -25,25 +25,18 @@ jobs:
             miniforge-version: latest
             use-mamba: true
       - name: Where?
-        run: which conda
+        run: |
+          which conda
+          which python
+        shell: bash -l {0}
       - name: Information
         run: conda info
+        shell: bash -l {0}
       - name: Configuration
         run: |
           conda config --show-sources
           conda config --show
-      - name: initialize
-        run: conda init
-      - name: Is conda a function or file?
-        run: type conda
-      - name: Is conda a function or file? 2
-        run: type conda
-        shell: bash -l {0}
-      - name: Is conda a function or file? 3
-        run: |
-          grep conda ~/.bashrc
-          source ~/.bashrc
-          type conda
         shell: bash -l {0}
       - name: conda-lock
-        run: mamba install -c conda-forge conda-lock
+        run: mamba install -c conda-forge conda-lock=1.0.5
+        shell: bash -l {0}
