@@ -26,6 +26,8 @@ jobs:
         run: |
           conda config --show-sources
           conda config --show
+      - name: initialize
+        run: conda init
       - name: Is conda a function or file?
         run: type conda
       - name: Is conda a function or file? 2
