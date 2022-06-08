@@ -33,3 +33,9 @@ jobs:
       - name: Is conda a function or file? 2
         run: type conda
         shell: bash -l {0}
+      - name: Is conda a function or file? 3
+        run: |
+          grep conda ~/.bashrc
+          source ~/.bashrc
+          type conda
+        shell: bash -l {0}
