@@ -22,3 +22,7 @@ jobs:
         run: which conda
       - name: Information
         run: conda info
+      - name: Configuration
+        run: |
+          conda config --show-sources
+          conda config --show
