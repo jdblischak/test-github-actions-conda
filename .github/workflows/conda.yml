@@ -24,10 +24,13 @@ jobs:
             miniforge-variant: Mambaforge
             miniforge-version: latest
             use-mamba: true
+      - name: install!
+        run: mamba install python r-base
       - name: Where?
         run: |
           which conda
           which python
+          which Rscript
         shell: bash -l {0}
       - name: Information
         run: conda info
