@@ -1,0 +1,25 @@
+name: Test conda
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/conda.yml'
+  workflow_dispatch:
+jobs:
+  check:
+    runs-on: ${{ matrix.config.os }}
+    name: test-${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {os: macOS-11}
+          - {os: ubuntu-20.04}
+          - {os: windows-latest}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Where?
+        run: which conda
+      - name: Information
+        run: conda info
