@@ -23,7 +23,6 @@ jobs:
         with:
             miniforge-variant: Mambaforge
             miniforge-version: latest
-            activate-environment: base
             use-mamba: true
       - name: Where?
         run: which conda
