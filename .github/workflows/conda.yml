@@ -18,6 +18,13 @@ jobs:
           - {os: ubuntu-20.04}
     steps:
       - uses: actions/checkout@v2
+      - name: Setup Mambaforge
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+            miniforge-variant: Mambaforge
+            miniforge-version: latest
+            activate-environment: base
+            use-mamba: true
       - name: Where?
         run: which conda
       - name: Information
@@ -40,4 +47,4 @@ jobs:
           type conda
         shell: bash -l {0}
       - name: conda-lock
-        run: conda install -c conda-forge conda-lock
+        run: mamba install -c conda-forge conda-lock
