@@ -26,3 +26,8 @@ jobs:
         run: |
           conda config --show-sources
           conda config --show
+      - name: Is conda a function or file?
+        run: type conda
+      - name: Is conda a function or file? 2
+        run: type conda
+        shell: bash -l {0}
