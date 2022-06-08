@@ -39,7 +39,5 @@ jobs:
           source ~/.bashrc
           type conda
         shell: bash -l {0}
-      - name: Install libmamba
-        run: conda install -n base conda-libmamba-solver
       - name: conda-lock
-        run: conda install -c conda-forge --experimental-solver=libmamba conda-lock
+        run: conda install -c conda-forge conda-lock
