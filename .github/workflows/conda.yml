@@ -29,7 +29,7 @@ jobs:
           environment-file: 'environment-${{ matrix.config.slug }}.lock'
           environment-name: test-conda
           cache-env: true
-          cache-env-key: ${{ runner.os }}-${{ hashFiles('environment-${{ matrix.config.slug }}.lock') }}-0
+          cache-env-key: ${{ runner.os }}-${{ hashFiles("environment-${{ matrix.config.slug }}.lock") }}-0
       - name: Where?
         run: |
           which micromamba
