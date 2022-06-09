@@ -28,6 +28,7 @@ jobs:
         run: conda list --explicit > environment-${{ matrix.config.slug }}.lock
       - name: Commit lockfile
         run: |
+          git config --local user.name "GitHub Actions"
           git add environment-${{ matrix.config.slug }}.lock
           git commit -m "Update lockfile for ${{ matrix.config.slug }}"
           git push origin main
