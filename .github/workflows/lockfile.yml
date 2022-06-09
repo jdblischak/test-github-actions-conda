@@ -1,0 +1,27 @@
+name: Export lockfile per OS
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/lockfile.yml'
+  workflow_dispatch:
+defaults:
+  run:
+    shell: bash -l {0}
+jobs:
+  check:
+    runs-on: ${{ matrix.config.os }}
+    name: lock-${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {os: macOS-11}
+          - {os: ubuntu-20.04}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Conda environment from environment.yml
+        uses: mamba-org/provision-with-micromamba@main
+      - name: Export lockfile
+        run: conda list --explicit
