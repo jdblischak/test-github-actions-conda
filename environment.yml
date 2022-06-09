@@ -1,0 +1,10 @@
+name: test-conda
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - numpy
+  - python
+  - r-base
+  - scipy
+  - snakemake
