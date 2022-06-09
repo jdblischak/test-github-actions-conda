@@ -22,10 +22,16 @@ jobs:
         shell: ${{ matrix.config.shell }}
     steps:
       - uses: actions/checkout@v2
-      - name: Install Conda environment from environment.yml
-        uses: mamba-org/provision-with-micromamba@main
+      - name: Setup Mambaforge
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+            miniforge-variant: Mambaforge
+            miniforge-version: latest
+            use-mamba: true
+            environment-file: environment.yml
+            activate-environment: test-conda
       - name: Export lockfile
-        run: micromamba list --explicit > environment-${{ matrix.config.slug }}.lock
+        run: conda list --explicit --md5 > environment-${{ matrix.config.slug }}.lock
       - name: Commit lockfile
         run: |
           git config --local user.name "GitHub Actions"
