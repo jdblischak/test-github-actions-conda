@@ -18,16 +18,18 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macOS-11}
-          - {os: ubuntu-20.04}
-          - {os: windows-latest}
+          - {os: macOS-11, slug: 'macos'}
+          - {os: ubuntu-20.04, slug: 'linux'}
+          - {os: windows-latest, slug: 'win'}
     steps:
       - uses: actions/checkout@v2
       - name: Install Conda environment from environment.yml
         uses: mamba-org/provision-with-micromamba@main
         with:
+          environment-file: 'environment-${{ matrix.config.slug }}.lock'
+          environment-name: test-conda
           cache-env: true
-          cache-env-key: ${{ runner.os }}-${{ hashFiles('environment.yml') }}-0
+          cache-env-key: ${{ runner.os }}-${{ hashFiles('environment-${{ matrix.config.slug }}.lock') }}-0
       - name: Where?
         run: |
           which micromamba
