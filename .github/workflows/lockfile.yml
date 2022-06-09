@@ -6,20 +6,20 @@ on:
     paths:
       - '.github/workflows/lockfile.yml'
   workflow_dispatch:
-defaults:
-  run:
-    shell: bash -l {0}
 jobs:
-  check:
+  lock:
     runs-on: ${{ matrix.config.os }}
     name: lock-${{ matrix.config.os }}
     strategy:
       fail-fast: false
       matrix:
         config:
-          - {os: macOS-11, slug: 'macos'}
-          - {os: ubuntu-20.04, slug: 'linux'}
-          - {os: windows-latest, slug: 'win'}
+          - {os: macOS-11, slug: 'macos', shell: 'bash -l {0}'}
+          - {os: ubuntu-20.04, slug: 'linux', shell: 'bash -l {0}'}
+          - {os: windows-latest, slug: 'win', shell: 'powershell'}
+    defaults:
+      run:
+        shell: ${{ matrix.config.shell }}
     steps:
       - uses: actions/checkout@v2
       - name: Install Conda environment from environment.yml
