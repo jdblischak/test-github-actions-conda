@@ -7,11 +7,8 @@ on:
       - '.github/workflows/conda.yml'
       - 'environment.yml'
   workflow_dispatch:
-defaults:
-  run:
-    shell: bash -l {0}
 jobs:
-  check:
+  conda:
     runs-on: ${{ matrix.config.os }}
     name: test-${{ matrix.config.os }}
     strategy:
