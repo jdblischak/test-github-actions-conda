@@ -7,6 +7,9 @@ on:
       - '.github/workflows/conda.yml'
       - 'environment.yml'
   workflow_dispatch:
+defaults:
+  run:
+    shell: bash -l {0}
 jobs:
   conda:
     runs-on: ${{ matrix.config.os }}
@@ -27,5 +30,7 @@ jobs:
           cache-env-key: ${{ runner.os }}-${{ hashFiles('environment.yml') }}-0
       - name: Where?
         run: |
+          which conda
+          type conda
           which python
           which Rscript
