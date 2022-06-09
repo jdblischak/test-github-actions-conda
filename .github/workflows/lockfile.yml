@@ -35,6 +35,7 @@ jobs:
       - name: Commit lockfile
         run: |
           git config --local user.name "GitHub Actions"
+          git config --local user.email "runneradmin@github.com"
           git pull origin main
           git add environment-${{ matrix.config.slug }}.lock
           git commit --allow-empty -m "Update lockfile for ${{ matrix.config.slug }}"
