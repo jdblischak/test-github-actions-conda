@@ -25,7 +25,7 @@ jobs:
       - name: Install Conda environment from environment.yml
         uses: mamba-org/provision-with-micromamba@main
       - name: Export lockfile
-        run: conda list --explicit > environment-${{ matrix.config.slug }}.lock
+        run: micromamba list --explicit > environment-${{ matrix.config.slug }}.lock
       - name: Commit lockfile
         run: |
           git config --local user.name "GitHub Actions"

@@ -30,7 +30,6 @@ jobs:
           cache-env-key: ${{ runner.os }}-${{ hashFiles('environment.yml') }}-0
       - name: Where?
         run: |
-          which conda
-          type conda
+          which micromamba
           which python
           which Rscript
