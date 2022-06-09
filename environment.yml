@@ -5,6 +5,6 @@ channels:
 dependencies:
   - numpy
   - python
-  - r-base
+  - r-base>4
   - scipy
   - snakemake
