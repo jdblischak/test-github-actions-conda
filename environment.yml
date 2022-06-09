@@ -2,6 +2,7 @@ name: test-conda
 channels:
   - conda-forge
   - bioconda
+  - nodefaults
 dependencies:
   - numpy
   - python
