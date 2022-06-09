@@ -20,6 +20,7 @@ jobs:
         config:
           - {os: macOS-11}
           - {os: ubuntu-20.04}
+          - {os: windows-latest}
     steps:
       - uses: actions/checkout@v2
       - name: Install Conda environment from environment.yml
