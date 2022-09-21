@@ -5,7 +5,6 @@ on:
       - main
     paths:
       - '.github/workflows/conda.yml'
-      - 'environment.yml'
   workflow_dispatch:
 defaults:
   run:
@@ -25,6 +24,7 @@ jobs:
       lockfile: ci/environment-${{ matrix.config.slug }}.lock
       _R_CHECK_CRAN_INCOMING_: TRUE
       _R_CHECK_CRAN_INCOMING_REMOTE_: FALSE
+      TZ: UTC
     steps:
       - uses: actions/checkout@v2
         with:
@@ -40,6 +40,10 @@ jobs:
           environment-name: wflow-env
           cache-env: true
           cache-env-key: ${{ runner.os }}-${{ hashFiles(env.lockfile) }}-0
+          # Install qpdf (not available for Windows)
+          extra-specs: |
+            sel(linux): conda-forge::qpdf
+            sel(osx): conda-forge::qpdf
       - name: Session information
         run: Rscript -e "sessionInfo()"
       - name: Build

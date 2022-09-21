@@ -31,5 +31,3 @@ dependencies:
   - r-withr >= 2.0.0
   # SystemRequirements:
   - pandoc >= 1.14, < 3
-  # Required for CRAN checks
-  - qpdf

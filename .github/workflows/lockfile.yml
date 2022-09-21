@@ -5,6 +5,7 @@ on:
       - main
     paths:
       - '.github/workflows/lockfile.yml'
+      - 'environment.yml'
   workflow_dispatch:
 jobs:
   lock:
