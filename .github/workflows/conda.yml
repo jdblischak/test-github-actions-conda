@@ -22,9 +22,14 @@ jobs:
           - {os: ubuntu-20.04, slug: 'linux'}
           - {os: windows-latest, slug: 'win'}
     env:
-      lockfile: environment-${{ matrix.config.slug }}.lock
+      lockfile: ci/environment-${{ matrix.config.slug }}.lock
     steps:
       - uses: actions/checkout@v2
+        with:
+          repository: workflowr/workflowr
+      - uses: actions/checkout@v2
+        with:
+          path: 'ci'
       - name: Install Conda environment from environment.yml
         uses: mamba-org/provision-with-micromamba@main
         with:
@@ -32,16 +37,9 @@ jobs:
           environment-name: wflow-env
           cache-env: true
           cache-env-key: ${{ runner.os }}-${{ hashFiles(env.lockfile) }}-0
-      - name: Where?
-        run: |
-          which micromamba
-          which python
-          which Rscript
-      - name: Install workflowr
-        run: Rscript -e 'print(.libPaths()); install.packages("workflowr", dependencies = FALSE)'
-      - name: Install workflowr
-        run: |
-          print(.libPaths())
-          library("workflowr")
-          sessionInfo()
-        shell: bash -l -c Rscript {0}
+      - name: Session information
+        run: Rscript -e "sessionInfo()"
+      - name: Build
+        run: R CMD build --no-manual .
+      - name: Check
+        run: R CMD check --no-manual --no-tests .
