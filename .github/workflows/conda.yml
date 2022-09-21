@@ -23,6 +23,8 @@ jobs:
           - {os: windows-latest, slug: 'win'}
     env:
       lockfile: ci/environment-${{ matrix.config.slug }}.lock
+      _R_CHECK_CRAN_INCOMING_: TRUE
+      _R_CHECK_CRAN_INCOMING_REMOTE_: FALSE
     steps:
       - uses: actions/checkout@v2
         with:
@@ -43,4 +45,4 @@ jobs:
       - name: Build
         run: R CMD build --no-manual workflowr/
       - name: Check
-        run: R CMD check --no-manual --no-tests workflowr_*.tar.gz
+        run: R CMD check --no-manual --no-tests --as-cran workflowr_*.tar.gz
