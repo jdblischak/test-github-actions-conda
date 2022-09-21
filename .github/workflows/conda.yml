@@ -38,9 +38,10 @@ jobs:
           which python
           which Rscript
       - name: Install workflowr
+        run: Rscript -e 'print(.libPaths()); install.packages("workflowr", dependencies = FALSE)'
+      - name: Install workflowr
         run: |
           print(.libPaths())
-          install.packages("workflowr", dependencies = FALSE)
           library("workflowr")
           sessionInfo()
-        shell: Rscript {0}
+        shell: bash -l -c Rscript {0}
