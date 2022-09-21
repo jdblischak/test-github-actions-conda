@@ -29,7 +29,7 @@ jobs:
             miniforge-version: latest
             use-mamba: true
             environment-file: environment.yml
-            activate-environment: test-conda
+            activate-environment: wflow-env
       - name: Export lockfile
         run: conda list --explicit --md5 > environment-${{ matrix.config.slug }}.lock
       - name: Commit lockfile
