@@ -26,10 +26,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          repository: workflowr/workflowr
+          path: ci
       - uses: actions/checkout@v2
         with:
-          path: 'ci'
+          repository: workflowr/workflowr
+          path: workflowr
       - name: Install Conda environment from environment.yml
         uses: mamba-org/provision-with-micromamba@main
         with:
@@ -40,6 +41,6 @@ jobs:
       - name: Session information
         run: Rscript -e "sessionInfo()"
       - name: Build
-        run: R CMD build --no-manual .
+        run: R CMD build --no-manual workflowr/
       - name: Check
         run: R CMD check --no-manual --no-tests workflowr_*.tar.gz
