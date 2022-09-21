@@ -52,11 +52,4 @@ jobs:
       - name: Check
         run: R CMD check --no-manual --as-cran workflowr_*.tar.gz
       - name: Test results
-        if: failure()
-        run: |
-          pwd
-          echo $HOME
-          ls -al1
-          ls -al1 ..
-          ls -R
-          cat test-github-actions-conda/workflowr.Rcheck/tests/testthat.Rout
+        run: cat workflowr.Rcheck/tests/testthat.Rout*
