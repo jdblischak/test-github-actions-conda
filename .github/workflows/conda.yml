@@ -51,3 +51,6 @@ jobs:
         run: R CMD build --no-manual workflowr/
       - name: Check
         run: R CMD check --no-manual --as-cran workflowr_*.tar.gz
+      - name: Test results
+        if: failure()
+        run: cat workflowr.Rcheck/tests/testthat.Rout
