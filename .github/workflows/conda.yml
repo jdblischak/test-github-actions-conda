@@ -40,10 +40,10 @@ jobs:
           environment-name: wflow-env
           cache-env: true
           cache-env-key: ${{ runner.os }}-${{ hashFiles(env.lockfile) }}-0
-          # Install qpdf (not available for Windows)
-          extra-specs: |
-            sel(linux): conda-forge::qpdf
-            sel(osx): conda-forge::qpdf
+      - name: Install qpdf
+        # conda pkg not available for Windows
+        if: runner.os != 'Windows'
+        run: micromamba install conda-forge::qpdf
       - name: Session information
         run: Rscript -e "sessionInfo()"
       - name: Build
